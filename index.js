@@ -41,27 +41,54 @@ function display(items) {
   lat = items.latlng[0];
   lon = items.latlng[1];
 
-  newDiv.innerHTML = `
-    <div class="card">
-      <img src="${items.flags.png}" alt="Flag" style="width: 100%" />
-      <div class="container">
-        <h4><b>${items.name.common}</b></h4>
-        <p>Official Name: ${items.name.official}</p>
-        <p>Region: ${items.region}</p>
-        <p>Capital: ${items.capital[0]}</p>
-        <p>Language: ${items.languages.ben}</p>
-        <p>Population: ${items.population}</p>
-        <p>Area: ${items.area}</p>
-        <p>Map:${items.maps.googleMaps}</p>
-        <p>Currencies: ${items.currencies.BDT.name} (${items.currencies.BDT.symbol})</p>
-        <p>Timezone: ${items.timezones[0]}</p>
-        <h4>Weather upfates of ${items.name.common}</h4> 
-        <div class="search_box">
+  // newDiv.innerHTML = `
+  //   <div class="card">
+  //     <img src="${items.flags.png}" alt="Flag" style="width: 100%" />
+  //     <div class="container">
+  //       <h4><b>${items.name.common}</b></h4>
+  //       <p>Official Name: ${items.name.official}</p>
+  //       <p>Region: ${items.region}</p>
+  //       <p>Capital: ${items.capital[0]}</p>
+  //       <p>Language: ${items.languages.ben}</p>
+  //       <p>Population: ${items.population}</p>
+  //       <p>Area: ${items.area}</p>
+  //       <p>Map:${items.maps.googleMaps}</p>
+  //       <p>Currencies: ${items.currencies.BDT.name} (${items.currencies.BDT.symbol})</p>
+  //       <p>Timezone: ${items.timezones[0]}</p>
+  //       <h4>Weather upfates of ${items.name.common}</h4>
+  //       <div class="search_box">
 
-      <button onclick="connect_2()">Weather</button>
+  //     <button onclick="connect_2()">Weather</button>
+  //   </div>
+  //     </div>
+  //   </div>`;
+
+  // oldContent.appendChild(newDiv);
+
+  newDiv.innerHTML = `<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <img src="${items.flags.png}" alt="Flag" style="width: 100%" />
     </div>
-      </div>
-    </div>`;
+    <div class="col">
+      <h4><b>${items.name.common}</b></h4>
+         <p>Official Name: ${items.name.official}</p>
+         <p>Region: ${items.region}</p>
+         <p>Capital: ${items.capital[0]}</p>
+         <p>Language: ${items.languages.ben}</p>
+         <p>Population: ${items.population}</p>
+         <p>Area: ${items.area}</p>
+         <p>Map:${items.maps.googleMaps}</p>
+         <p>Currencies: ${items.currencies.BDT.name} (${items.currencies.BDT.symbol})</p>
+         <p>Timezone: ${items.timezones[0]}</p>
+         <h4>Weather updates of ${items.name.common}</h4>
+         <div class="search_box">
+
+       <button onclick="connect_2()">Weather data</button>
+    </div>
+  </div>
+  </div>
+`;
 
   oldContent.appendChild(newDiv);
 }
@@ -126,14 +153,18 @@ function display_3(data) {
 
   var newDiv = document.createElement("div");
   newDiv.innerHTML = `<section class="current-weather">
+  <h1>${data.name}'s capital current weather forcast</h1>
         <div class="container">
           <div class="row">
-            <h1 class="col temp-title" id="current-temperature">${
+            <h1 class="col temp-title" id="current-temperature" style="padding-bottom: 10px;">${
               data.main.temp
             }°</h1>
+            
             <div class="col todays-info">
               <p id="current-time">${getTimeFromUnixTimestamp(data.dt)}</p>
-              <h2 id="current-day">${getDayNameFromUnixTimestamp(data.dt)}</h2>
+              <h2 id="current-day" style="margin-right: 100px;">${getDayNameFromUnixTimestamp(
+                data.dt
+              )}</h2>
               <p id="weather-type">${data.weather[0].description}</p>
             </div>
             <div class="col d-flex align-items-center side-info">
