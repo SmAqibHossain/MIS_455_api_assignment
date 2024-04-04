@@ -4,10 +4,12 @@ var temp = [];
 var des = [];
 var icon = [];
 var day = [];
+var capital;
 function connect() {
   var searchTerm = document.getElementById("searchBox").value;
   document.getElementById("searchBox").value = "";
-  var url = `https://restcountries.com/v3.1/name/${searchTerm}`;
+  // var url = `https://restcountries.com/v3.1/name/${searchTerm}`;
+  var url = `https://restcountries.com/v3.1/name/${searchTerm}?fullText=true`;
 
   fetch(url)
     .then((res) => res.json())
@@ -28,6 +30,9 @@ function display(items) {
   var oldContent = document.getElementById("container");
   oldContent.textContent = "";
 
+  var oldContent_1 = document.getElementById("container_upper");
+  oldContent_1.textContent = "";
+
   var newDiv = document.createElement("div");
 
   // newDiv.innerHTML = `      <div class="card">
@@ -40,6 +45,7 @@ function display(items) {
 
   lat = items.latlng[0];
   lon = items.latlng[1];
+  capital = items.capital[0];
 
   // newDiv.innerHTML = `
   //   <div class="card">
@@ -52,12 +58,11 @@ function display(items) {
   //       <p>Language: ${items.languages.ben}</p>
   //       <p>Population: ${items.population}</p>
   //       <p>Area: ${items.area}</p>
-  //       <p>Map:${items.maps.googleMaps}</p>
+  //       <p> Map:  <a href="${items.maps.googleMaps}">Link</a> </p>
   //       <p>Currencies: ${items.currencies.BDT.name} (${items.currencies.BDT.symbol})</p>
   //       <p>Timezone: ${items.timezones[0]}</p>
   //       <h4>Weather upfates of ${items.name.common}</h4>
   //       <div class="search_box">
-
   //     <button onclick="connect_2()">Weather</button>
   //   </div>
   //     </div>
@@ -78,8 +83,8 @@ function display(items) {
          <p>Language: ${items.languages.ben}</p>
          <p>Population: ${items.population}</p>
          <p>Area: ${items.area}</p>
-         <p>Map:${items.maps.googleMaps}</p>
-         <p>Currencies: ${items.currencies.BDT.name} (${items.currencies.BDT.symbol})</p>
+         <p> Map:  <a href="${items.maps.googleMaps}">Link</a> </p>
+
          <p>Timezone: ${items.timezones[0]}</p>
          <h4>Weather updates of ${items.name.common}</h4>
          <div class="search_box">
@@ -153,7 +158,7 @@ function display_3(data) {
 
   var newDiv = document.createElement("div");
   newDiv.innerHTML = `<section class="current-weather">
-  <h1>${data.name}'s capital current weather forcast</h1>
+  <h1>${data.name}'s capital ${capital}'s current weather forcast</h1>
         <div class="container">
           <div class="row">
             <h1 class="col temp-title" id="current-temperature" style="padding-bottom: 10px;">${
